@@ -1,0 +1,53 @@
+{% extends "base.html" %}
+{% block title %} Home {% endblock %}
+{% block content %}
+<!-- <h1>Hello, Welcome to Squib</h1> -->
+<div class="row" id="tweets">
+
+</div>
+<script>
+    const tweetsElement = document.getElementById("tweets")
+    const xhr = new XMLHttpRequest()
+    const method = 'GET'
+    const url = '/tweets'
+    const responseType = 'json'
+
+    function handleLikes(tweetId, currentLike){
+        console.log(tweetId, currentLike)
+        currentLike ++
+        return
+    }
+    
+    function likeBtn(tweet) {
+        return "<button class='btn btn-primary' onclick=handleLikes(" + tweet.id + "," + tweet.likes + ")>Like</button>"
+    }
+
+    function showContent(tweet) {
+        let content = "<div class='col-12 col-md-10 mx-auto mb-4 border rounded py-3' id='tweet-" + tweet.id + "'><p >" + tweet.content +
+            "</p><div class='btn-group'>"
+            + likeBtn(tweet) +
+            "</div></div>"
+        return content
+    }
+
+
+    xhr.responseType = responseType
+    xhr.open(method, url)
+    xhr.onload = function () {
+        const serverResponse = xhr.response
+        var listedItems = serverResponse.response
+        let finalContent = ""
+        // tweetsElement.innerHTML = listedItems  
+        for (item in listedItems) {
+            finalContent += showContent(listedItems[item])
+        }
+        // console.log(listedItems)
+        // console.log(finalContent)
+        tweetsElement.innerHTML = finalContent
+    }
+    xhr.send()
+
+
+
+</script>
+{% endblock %}
