@@ -26,9 +26,9 @@ SECRET_KEY = "django-insecure-%)!4*ljjlk%v&$@01+%8gvivxgv4xbs_t0w3n$+455r=1$j6yl
 DEBUG = True
 CSRF_TRUSTED_ORIGINS = ['https://*.preview.app.github.dev']
 
+MAX_TWEET_LENGTH = 250
 ALLOWED_HOSTS = ["*"]
 LOGIN_URL = "/login"
-
 
 # Application definition
 

@@ -1,9 +1,10 @@
 from django.conf import settings
 from django.shortcuts import render, redirect
 from django.http import  JsonResponse
-# from django.utils.http import is_safe_url
 from .models import TweetModel
 from .forms import tweetForm
+from .serializer import TweetSerializer
+
 # Create your views here.
 def home_view(request, *args, **kwargs):
     return render(request, "pages/home.html" )
@@ -32,6 +33,16 @@ def tweet_list(request, *args, **kwargs):
 
     return JsonResponse(data)
 
+# Create tweet using djanog rest framework 
+
+def create_tweet(request, *args, **kwargs):
+    serializer = TweetSerializer(data = request.POST or None)
+    if serializer.is_valid():
+        serializer.save(user=request.user)
+        return JsonResponse(serializer.data, status=201)
+    return JsonResponse({}, status=400)
+
+''' create tweet in pure django 
 def create_tweet(request, *args, **kwargs):
     user = request.user
     if not user.is_authenticated:
@@ -55,6 +66,6 @@ def create_tweet(request, *args, **kwargs):
         if request.headers.get('x-requested-with') == 'XMLHttpRequest':
             return JsonResponse(form.errors, status=400)
         form = tweetForm()
-    return render(request, "components/form.html", context={"form": form})
+    return render(request, "components/form.html", context={"form": form}) '''
 
     
