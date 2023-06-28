@@ -1,4 +1,3 @@
-import random
 from django.conf import settings
 from django.shortcuts import render, redirect
 from django.http import  JsonResponse
@@ -26,9 +25,7 @@ def tweet_detail_view(request, tweet_id, *args, **kwargs):
 
 def tweet_list(request, *args, **kwargs):
     qs = TweetModel.objects.all()
-    tweets_list = [
-        {'id': x.id, 'content':x.content, 'likes': random.randint(0, 250)} for x in qs
-    ]
+    tweets_list = [ x.serialize() for x in qs ]
     data = {
         'isUser' : False ,
         'response' : tweets_list}
@@ -38,10 +35,12 @@ def tweet_list(request, *args, **kwargs):
 def create_tweet(request, *args, **kwargs):
     form = tweetForm(request.POST or None)
     next_url = request.POST.get("next" or None)
-    print(next_url)
+    # print(next_url)
     if form.is_valid():
         obj = form.save(commit=False)
         obj.save()
+        if request.headers.get ('x-requested-with') == 'XMLHttpRequest':
+            return JsonResponse(obj.serialize(), status=201)
         if next_url != None :
             return redirect(next_url)
         form = tweetForm()
