@@ -6,8 +6,9 @@
     <div class="col-md-4 col-10 mx-auto">
         <form action="/tweet-create" method="post" class="my-4" id="tweet-create-form">
             {% csrf_token %}
+            <div class="d-none" id="tweet-form-error"></div>
             <input type="hidden" name="next" value="/" />
-            <textarea class="form-control" name="content" placeholder="How was the day!!!"></textarea>
+            <textarea class="form-control" name="content" placeholder="How was the day!!!" required></textarea>
             <button class="btn btn-primary mt-2" type="submit">Tweet</button>
         </form>
     </div>
@@ -19,6 +20,18 @@
 <script>
     const tweetsContainerEl = document.getElementById("tweets")
     const tweetCreateFormEl = document.getElementById("tweet-create-form")
+    const tweetFormError = document.getElementById("tweet-form-error")
+
+    function handleTweetFormError(msg, display){
+        if (display === true){
+            // show error 
+            tweetFormError.setAttribute("class", "d-block alert alert-danger")
+            tweetFormError.innerHTML = msg
+        }else{
+            // hide 
+            tweetFormError.setAttribute("class", 'd-none')
+        }
+    }
 
     function handleTweetsCreateForm(event){
         event.preventDefault();
@@ -41,7 +54,37 @@
                 const newTweetEl = showContent(newTweetJson)
                 const oldHtml = tweetsContainerEl.innerHTML
                 tweetsContainerEl.innerHTML = newTweetEl + oldHtml
+                myForm.reset()
+
+            // form error handle 
+            }else if (xhr.status === 400){
+                const formError = xhr.response
+                const errorJson = JSON.parse(formError)
+                const contentError = errorJson.content;
+                let contentErrorMsg;
+                // show error on screen 
+                if (contentError){
+                    contentErrorMsg = contentError[0]
+                }else {
+                    alert("An error occured. Please try again.")
+                }
+                if (contentErrorMsg){
+                    handleTweetFormError(contentErrorMsg, true)
+                }else {
+                    alert("A error occured. Please tyr again.")
+                }
+                // console.log(contentErrorMsg)
+
+            }else if(xhr.status === 401){
+                alert("You must Login")
+                window.location.href="/login"
+            
+            }else if(xhr.status === 500){
+                alert("There was a server error. Please Try again later.")
             }
+        }
+        xhr.onerror = function() {
+            alert("A Error occured. Please try again.")
         }
         xhr.send(myFormData)
     }

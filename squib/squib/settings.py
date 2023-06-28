@@ -27,6 +27,7 @@ DEBUG = True
 CSRF_TRUSTED_ORIGINS = ['https://*.preview.app.github.dev']
 
 ALLOWED_HOSTS = ["*"]
+LOGIN_URL = "/login"
 
 
 # Application definition
@@ -38,6 +39,9 @@ INSTALLED_APPS = [
     "django.contrib.sessions",
     "django.contrib.messages",
     "django.contrib.staticfiles",
+
+    # extension/ libraries
+    "rest_framework",
 
     # application
     "tweet.apps.TweetConfig"

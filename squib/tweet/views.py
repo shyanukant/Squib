@@ -33,16 +33,27 @@ def tweet_list(request, *args, **kwargs):
     return JsonResponse(data)
 
 def create_tweet(request, *args, **kwargs):
+    user = request.user
+    if not user.is_authenticated:
+        user = None
+        if request.headers.get ('x-requested-with') == 'XMLHttpRequest':
+            return JsonResponse({}, status=401)
+        return redirect(settings.LOGIN_URL)
+    
     form = tweetForm(request.POST or None)
     next_url = request.POST.get("next" or None)
     # print(next_url)
     if form.is_valid():
         obj = form.save(commit=False)
+        obj.user = user
         obj.save()
         if request.headers.get ('x-requested-with') == 'XMLHttpRequest':
             return JsonResponse(obj.serialize(), status=201)
         if next_url != None :
             return redirect(next_url)
+    if form.errors:
+        if request.headers.get('x-requested-with') == 'XMLHttpRequest':
+            return JsonResponse(form.errors, status=400)
         form = tweetForm()
     return render(request, "components/form.html", context={"form": form})
 
