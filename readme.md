@@ -1,4 +1,4 @@
-# Squib - A tweet application using Django, Javascript and Bootstrap
+# Squib - A tweet application using Django, Pure Javascript / React and Bootstrap
 
 
 - Site Map
