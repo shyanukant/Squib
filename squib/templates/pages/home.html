@@ -115,7 +115,7 @@
 
     tweetCreateFormEl.addEventListener("submit", handleTweetsCreateForm);
 
-    function handleLikes(tweetId, currentLike, action) {
+    function handleTweetActions(tweetId, currentLike, action) {
         console.log(tweetId, currentLike)
         const url = "{% url 'tweet:action' %}";
         const method = "POST"
@@ -142,14 +142,14 @@
     }
 
     function reTweet(tweet) {
-        return "<button class='btn btn-success' onclick=handleLikes(" + tweet.id + "," + tweet.likes + ",'retweet'" + ")> Retweet</button>"
+        return "<button class='btn btn-success' onclick=handleTweetActions(" + tweet.id + "," + tweet.likes + ",'retweet'" + ")> Retweet</button>"
     }
     function unlikeBtn(tweet) {
-        return "<button class='btn btn-danger' onclick=handleLikes(" + tweet.id + "," + tweet.likes + ",'unlike'" + ")> Unlike</button>"
+        return "<button class='btn btn-danger' onclick=handleTweetActions(" + tweet.id + "," + tweet.likes + ",'unlike'" + ")> Unlike</button>"
     }
 
     function likeBtn(tweet) {
-        return "<button class='btn btn-primary' onclick=handleLikes(" + tweet.id + "," + tweet.likes + ",'like'" + ")>" + tweet.likes + " Like</button>"
+        return "<button class='btn btn-primary' onclick=handleTweetActions(" + tweet.id + "," + tweet.likes + ",'like'" + ")>" + tweet.likes + " Like</button>"
     }
 
     function showContent(tweet) {

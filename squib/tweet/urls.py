@@ -10,7 +10,7 @@ urlpatterns = [
     path("", tweet_list, name="tweets"),
     path("create/", create_tweet, name="create"),
     path("action/", tweet_action, name='action'),
-    path("<int:tweet_id>/", tweet_detail_view, name="tweet_detail"),
+    path("<int:tweet_id>/", tweet_detail_view, name="detail"),
     path("<int:tweet_id>/delete", delete_tweet, name="delete"),
 
 ]
