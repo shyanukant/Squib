@@ -4,7 +4,7 @@
 <!-- <h1>Hello, Welcome to Squib</h1> -->
 <div class="row">
     <div class="col-md-4 col-10 mx-auto">
-        <form action="/tweet-create" method="post" class="my-4" id="tweet-create-form">
+        <form action="{% url 'tweet:create' %}" method="post" class="my-4" id="tweet-create-form">
             {% csrf_token %}
             <div class="d-none" id="tweet-form-error"></div>
             <input type="hidden" name="next" value="/" />
@@ -117,7 +117,7 @@
 
     function handleLikes(tweetId, currentLike, action) {
         console.log(tweetId, currentLike)
-        const url = "{% url 'action' %}";
+        const url = "{% url 'tweet:action' %}";
         const method = "POST"
         const data = JSON.stringify({
             id: tweetId,
@@ -165,7 +165,7 @@
     function loadTweets(tweetsElement) {
         const xhr = new XMLHttpRequest()
         const method = 'GET'
-        const url = '/tweets'
+        const url = "api/tweets"
         const responseType = 'json'
         xhr.responseType = responseType
         xhr.open(method, url)
