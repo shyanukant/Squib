@@ -3,3 +3,4 @@ Django==4.2.2
 sqlparse==0.4.4
 websocket-client==1.5.2
 djangorestframework-3.14.0
+django-cors-headers-4.1.0

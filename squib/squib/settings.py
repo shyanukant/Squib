@@ -24,7 +24,6 @@ SECRET_KEY = "django-insecure-%)!4*ljjlk%v&$@01+%8gvivxgv4xbs_t0w3n$+455r=1$j6yl
 
 # SECURITY WARNING: don't run with debug turned on in production!
 DEBUG = True
-CSRF_TRUSTED_ORIGINS = ['https://*.preview.app.github.dev']
 
 # App name
 APP_NAME = 'squib'
@@ -33,7 +32,7 @@ APP_NAME = 'squib'
 MAX_TWEET_LENGTH = 250
 TWEET_ACTION_OPTIONS = ['like', 'unlike', 'retweet']
 
-ALLOWED_HOSTS = ["*"]
+ALLOWED_HOSTS = ['https://*.preview.app.github.dev', 'localhost']
 LOGIN_URL = "/login"
 
 # Application definition
@@ -48,6 +47,7 @@ INSTALLED_APPS = [
 
     # extension/ libraries
     "rest_framework",
+    "corsheaders",
 
     # application
     "tweet.apps.TweetConfig"
@@ -56,6 +56,7 @@ INSTALLED_APPS = [
 MIDDLEWARE = [
     "django.middleware.security.SecurityMiddleware",
     "django.contrib.sessions.middleware.SessionMiddleware",
+    "corsheaders.middleware.CorsMiddleware", # corsheader
     "django.middleware.common.CommonMiddleware",
     "django.middleware.csrf.CsrfViewMiddleware",
     "django.contrib.auth.middleware.AuthenticationMiddleware",
@@ -135,6 +136,16 @@ STATIC_URL = "static/"
 # https://docs.djangoproject.com/en/4.2/ref/settings/#default-auto-field
 
 DEFAULT_AUTO_FIELD = "django.db.models.BigAutoField"
+
+# ORIGINS FOR CSRF REQUEST
+CSRF_TRUSTED_ORIGINS = ['https://*.preview.app.github.dev', 'http://localhost:8000', 'http://localhost:3000']
+
+# CROSS ORIGIN RESOURCE SARING: This allows in-browser requests to your Django application from other origins.
+CORS_ALLOW_ALL_ORIGINS = True
+CORS_ALLOW_CREDENTIALS = False
+# CORS_ALLOWED_ORIGINS = ["https://*.preview.app.github.dev"]
+CORS_URLS_REGEX = r"^/api/.*$"
+
 DEFAULT_RENDERER_CLASSES = [
         'rest_framework.renderers.JSONRenderer',
     ]
