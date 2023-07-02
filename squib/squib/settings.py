@@ -32,7 +32,7 @@ APP_NAME = 'squib'
 MAX_TWEET_LENGTH = 250
 TWEET_ACTION_OPTIONS = ['like', 'unlike', 'retweet']
 
-ALLOWED_HOSTS = ['https://*.preview.app.github.dev', 'localhost']
+ALLOWED_HOSTS = ['*', 'localhost']
 LOGIN_URL = "/login"
 
 # Application definition
@@ -142,7 +142,7 @@ STATIC_ROOT = os.path.join(BASE_DIR / "static-root") # python manage.py collects
 DEFAULT_AUTO_FIELD = "django.db.models.BigAutoField"
 
 # ORIGINS FOR CSRF REQUEST
-CSRF_TRUSTED_ORIGINS = ['https://*.preview.app.github.dev', 'http://localhost:8000', 'http://localhost:3000']
+# CSRF_TRUSTED_ORIGINS = ['http://localhost:8000', 'http://localhost:3000']
 
 # CROSS ORIGIN RESOURCE SARING: This allows in-browser requests to your Django application from other origins.
 CORS_ALLOW_ALL_ORIGINS = True
@@ -153,12 +153,15 @@ CORS_URLS_REGEX = r"^/api/.*$"
 DEFAULT_RENDERER_CLASSES = [
         'rest_framework.renderers.JSONRenderer',
     ]
+DEFAULT_AUTHENTICATION_CLASSES = ['rest_framework.authentication.SessionAuthentication']
 if DEBUG:
     DEFAULT_RENDERER_CLASSES += ['rest_framework.renderers.BrowsableAPIRenderer']
+    DEFAULT_AUTHENTICATION_CLASSES += [
+        # custom authentication
+        'squib.rest_api.dev.DevAuthentication'
+    ]
 
 REST_FRAMEWORK = {
-    'DEFAULT_AUTHENTICATION_CLASSES': [
-        'rest_framework.authentication.SessionAuthentication',
-    ],
+    'DEFAULT_AUTHENTICATION_CLASSES': DEFAULT_AUTHENTICATION_CLASSES,
     'DEFAULT_RENDERER_CLASSES': DEFAULT_RENDERER_CLASSES
 }

@@ -38,7 +38,7 @@ def tweet_detail_view(request, tweet_id, *args, **kwargs):
 @api_view(['POST'])  # http method the client sent === POST
 @permission_classes([IsAuthenticated])
 def create_tweet(request, *args, **kwargs):
-    serializer = TweetCreateSerializer(data=request.POST)
+    serializer = TweetCreateSerializer(data=request.data)
     if serializer.is_valid(raise_exception=True):
         serializer.save(user=request.user)
         return Response(serializer.data, status=201)
@@ -46,7 +46,7 @@ def create_tweet(request, *args, **kwargs):
 
 @api_view(['GET', 'DELETE', 'POST'])
 @permission_classes([IsAuthenticated])
-def delete_tweet(request, tweet_id):
+def delete_tweet(request, tweet_id, *args, **kwargs):
     qs = TweetModel.objects.filter(id = tweet_id)
     if not qs.exists():
         return Response({}, status=404)

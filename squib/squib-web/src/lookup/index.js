@@ -1,3 +1,5 @@
-import { loadTweets } from "./lookup";
+import { loadTweets, createTweet } from "./lookup";
 
-export default loadTweets ;
+export {loadTweets,
+     createTweet
+    } ;
