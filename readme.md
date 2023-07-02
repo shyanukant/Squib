@@ -18,3 +18,43 @@
         -> Register
         -> Login
 ```
+
+## Django Setup(backend)
+```bash
+cd squib/squib
+```
+
+Install all dependencies
+```bash
+pip install -r requirements.txt
+```
+
+Add all database table
+```bash
+python manage.py makemigrations && python manage.py migrate 
+```
+
+Create Super User
+```bash
+python manage.py createsuperuser --username <your_admin_name> --email <email@example.com>
+```
+
+Run server
+```bash
+python manage.py runserver
+```
+
+## React Setup(frontend)
+
+```bash
+cd squib/squib-web
+```
+
+Install react dependencies
+```bash
+npm install
+```
+Run server
+```bash
+run start
+```

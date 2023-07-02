@@ -7,7 +7,7 @@ function App() {
   function loadTweets(callback) {
     const xhr = new XMLHttpRequest()
     const method = 'GET'
-    const url = "https://shyanukant-vigilant-space-fiesta-rv9g6q4vpwfx5p5-8000.preview.app.github.dev/api/tweets/"
+    const url = "http://localhost:8000/api/tweets/"
     const responseType = 'json'
     xhr.responseType = responseType
     xhr.open(method, url)
