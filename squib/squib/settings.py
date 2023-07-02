@@ -147,6 +147,7 @@ DEFAULT_AUTO_FIELD = "django.db.models.BigAutoField"
 # CROSS ORIGIN RESOURCE SARING: This allows in-browser requests to your Django application from other origins.
 CORS_ALLOW_ALL_ORIGINS = True
 CORS_ALLOW_CREDENTIALS = False
+CORS_ALLOW_HEADERS = ['*'] 
 # CORS_ALLOWED_ORIGINS = ["https://*.preview.app.github.dev"]
 CORS_URLS_REGEX = r"^/api/.*$"
 
