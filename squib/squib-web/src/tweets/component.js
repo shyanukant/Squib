@@ -8,21 +8,25 @@ import {loadTweets, createTweet} from "../lookup";
 export function TweetCoponent(props) {
     const [newTweets, setNewTweets] = useState([])
     const textAreaRef = React.createRef()
+    
+    const handleBackendUpdate = (response, status) =>{
+        // backend api response 
+        if(status===201){
+            let tempTweet = [...newTweets]  
+            tempTweet.unshift(response)
+            setNewTweets(tempTweet)
+        }else{
+            alert("The error occurred, Please try again later!!")
+            console.log(response)
+        }
+    }
+
     const handleSubmit = (event) => {
         event.preventDefault()
         // console.log(event)
         const newValue = textAreaRef.current.value
-        let tempTweet = [...newTweets]
-        // create tweet in server 
-        createTweet(newValue, (response, status) => {
-            if(status===201){
-                tempTweet.unshift(response)
-                setNewTweets(tempTweet)
-            }else{
-                alert("The error occurred, Please try again later!!")
-                console.log(response)
-            }
-        })
+        // create tweet in server  - backend api reqest
+        createTweet(newValue, handleBackendUpdate)
         
         textAreaRef.current.value = ''
     }
