@@ -19,6 +19,10 @@ def home_view(request, *args, **kwargs):
 @api_view(['GET'])
 def tweet_list(request):
     qs = TweetModel.objects.all()
+    # tweet limitation according to user
+    username = request.GET.get('username')
+    if username != None:
+        qs = qs.filter(user__username__iexact=username)
     serializer = TweetSerializer(qs, many=True)
     return Response(serializer.data)
 
