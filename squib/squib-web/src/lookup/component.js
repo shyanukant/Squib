@@ -19,7 +19,7 @@ function getCookie(name) {
 
 // fetch data from backend server or api 
 
-export function lookup(method, endpoint, callback, data) {
+export function BackendLookup(method, endpoint, callback, data) {
   let jsonData;
   if (data) {
     jsonData = JSON.stringify(data)
