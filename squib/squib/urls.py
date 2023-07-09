@@ -23,14 +23,13 @@ from tweet.views import (
                          tweet_list_view, 
                          tweet_profile_view)
 
-from django.views.generic import TemplateView
 
 urlpatterns = [
     path("admin/", admin.site.urls),
     path("", tweet_list_view),
     path("<int:tweet_id>", tweet_detail_view),
     path("profile/<str:username>", tweet_profile_view),
-    path("api/tweets/", include("tweet.urls"), name="tweets"),
+    path("api/tweets/", include("tweet.api.urls"), name="tweets"),
 ]
 
 if settings.DEBUG:

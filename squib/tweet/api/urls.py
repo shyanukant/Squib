@@ -1,5 +1,5 @@
 from django.urls import path
-from tweet.views import (
+from .views import (
                          tweet_detail, 
                          tweet_list, 
                          create_tweet, 
