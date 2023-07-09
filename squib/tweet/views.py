@@ -34,7 +34,7 @@ def tweet_detail_view(request, tweet_id, *args, **kwargs):
         return Response({}, status=404)
     obj = qs.first()
     serializer = TweetSerializer(obj)
-    return Response(serializer.data, status=201)
+    return Response(serializer.data, status=200)
 
 # Create tweet using djanog rest framework
 

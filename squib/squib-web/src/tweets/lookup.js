@@ -9,13 +9,13 @@ export function apiActionTweet(tweetId, action, callback){
 }
     
 export function apiLoadTweets(username , callback) {
-    let endpoint = 'tweet/'
+    let endpoint = 'tweets/'
     if (username){
         endpoint = `tweets/?username=${username}`
     }
     BackendLookup('GET', endpoint , callback)
     }
 
-export function apiTweetDetail(tweetID, callback){
-    BackendLookup('GET', `tweets/${tweetID}`, callback)
+export function apiTweetDetail(tweetId, callback){
+    BackendLookup('GET', `tweets/${tweetId}/`, callback)
 }

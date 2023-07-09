@@ -1,7 +1,8 @@
 import React from "react";
 import { useState, useEffect } from "react";
-import { apiCreateTweet} from "./lookup";
+import { apiCreateTweet, apiTweetDetail} from "./lookup";
 import { TweetList } from "./list";
+import { Tweet } from "./tweet";
 
 export function TweetComponent(props) {
     // console.log(props)
@@ -44,4 +45,29 @@ export function TweetComponent(props) {
         }
         <TweetList newTweets={newTweets} {...props} />
     </div>
+}
+
+export function TweetDetailComponent(props){
+    const {tweetId} = props
+    const [tweet, setTweet] = useState(null)
+    const [didLookup, setDidLookup] = useState(false)
+
+    const handleLookupDetail = (response, status) => {
+        // console.log(response, status)
+        if (status === 200){
+            setTweet(response)
+        }else{
+            alert("There was a error finding your tweet!!")
+        }
+    } 
+
+    useEffect(() => {
+        if (didLookup === false ){
+            apiTweetDetail(tweetId, handleLookupDetail)
+            setDidLookup(true)
+        }
+    }, [tweetId, didLookup, setDidLookup])
+
+    return tweet === null ? null : <Tweet tweet = {tweet} className={props.className}/>
+
 }

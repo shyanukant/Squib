@@ -25,10 +25,11 @@
       work correctly both with client-side routing and a non-root public URL.
       Learn how to configure a non-root public URL by running `npm run build`.
     -->
-    <title>React App</title>
+    <title>Squib</title>
   </head>
   <body>
     <noscript>You need to enable JavaScript to run this app.</noscript>
+    <div id="tweet-container"></div>
     <div id="root" data-username="shyanukant" data-can-tweet="false"></div>
     <!--
       This HTML file is a template.
@@ -40,5 +41,21 @@
       To begin the development, run `npm start` or `yarn start`.
       To create a production bundle, use `npm run build` or `yarn build`.
     -->
+    <script>
+      var path = window.location.pathname
+      var RegEX = /(?<tweetId>\d+)/
+      var match = path.match(RegEX)
+      // console.log(match)
+      // console.log(tweetId)
+      if (match){
+        var tweetId = match.groups.tweetId ;
+        var root = document.getElementById("root");
+        root.className = "d-none" ;
+        var tweetEl = `<div class='tweet-detail' data-tweet-id='${tweetId}'data-class-name='col-6 mx-auto' ></div>`;
+        var mainContainer = document.getElementById("tweet-container");
+        mainContainer.innerHTML = tweetEl ;
+      }
+      
+    </script>
   </body>
 </html>
