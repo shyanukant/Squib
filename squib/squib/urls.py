@@ -31,8 +31,6 @@ urlpatterns = [
     path("<int:tweet_id>", tweet_detail_view),
     path("profile/<str:username>", tweet_profile_view),
     path("api/tweets/", include("tweet.urls"), name="tweets"),
-    # path("", home_view, name="home"),
-    # path("react/", TemplateView.as_view(template_name= "react_vi_dj.html")),
 ]
 
 if settings.DEBUG:

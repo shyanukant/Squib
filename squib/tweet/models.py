@@ -24,13 +24,3 @@ class TweetModel(models.Model):
     @property
     def is_retweet(self):
         return self.parent != None
-
-    """
-    old serialization method
-    def serialize(self) :
-        return {
-            "id" : self.id,
-            "content" : self.content,
-            "likes" : random.randint(0, 200)
-        }
-    """
