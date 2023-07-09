@@ -12,10 +12,23 @@ from .serializer import TweetSerializer, TweetActionSerializer, TweetCreateSeria
 # Create your views here.
 
 
-def home_view(request, *args, **kwargs):
-    return render(request, "pages/home.html")
+# def home_view(request, *args, **kwargs):
+#     username = None
+#     if request.user.is_authenticated:
+#         username = request.user.username
+#     return render(request, "pages/home.html", context={"username" : username})
 
+# Local views 
+def tweet_detail_view(request, tweet_id, *args, **kwargs):
+    return render(request, "tweets/detail.html", context={"tweet_id" : tweet_id})
 
+def tweet_list_view(request, *args, **kwargs):
+    return render(request, "tweets/list.html")
+
+def tweet_profile_view(request, username, *args, **kwargs):
+    return render(request, "tweets/profile.html", context={"profile_username" : username})
+
+# api views 
 @api_view(['GET'])
 def tweet_list(request):
     qs = TweetModel.objects.all()
@@ -28,7 +41,7 @@ def tweet_list(request):
 
 
 @api_view(['GET'])
-def tweet_detail_view(request, tweet_id, *args, **kwargs):
+def tweet_detail(request, tweet_id, *args, **kwargs):
     qs = TweetModel.objects.filter(id=tweet_id)
     if not qs.exists():
         return Response({}, status=404)

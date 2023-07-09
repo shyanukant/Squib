@@ -9,7 +9,7 @@ export function ActionBtn(props) {
     const dsiplay = action.type === "like" ? `${likes} ${action.display}` : action.display;
 
     const handleActionBackendEvent = (response, status) => {
-        console.log(response, status)
+        // console.log(response, status)
         if ((status === 200 || status === 201) && didPerformAction) {
             didPerformAction(response, status)
         }

@@ -6,17 +6,20 @@ import { TweetComponent, TweetDetailComponent } from './tweets';
 import reportWebVitals from './reportWebVitals';
 
 const tweetEl = document.getElementById('root');
-const root = ReactDOM.createRoot(tweetEl);
-const e = React.createElement ;
-// console.log(tweetEl.dataset)
-root.render(
-    <TweetComponent className='container' {...tweetEl.dataset}/>
-);
+if (tweetEl) {
+    ReactDOM.createRoot(tweetEl).render(
+        <TweetComponent {...tweetEl.dataset} />
+    );
+}
 
 const tweetDetailEl = document.querySelectorAll(".tweet-detail");
-tweetDetailEl.forEach(container => {
-    ReactDOM.createRoot(container).render(e(TweetDetailComponent, {...container.dataset}));
-});
+if (tweetDetailEl) {
+    tweetDetailEl.forEach(container => {
+        ReactDOM.createRoot(container).render(
+            <TweetDetailComponent {...container.dataset} />
+        );
+    });
+}
 
 // If you want to start measuring performance in your app, pass a function
 // to log results (for example: reportWebVitals(console.log))
