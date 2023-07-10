@@ -4,18 +4,6 @@ from django.contrib.auth import login, logout
 
 # create views 
 
-def register_view(request, *args, **kwargs):
-    form = UserCreationForm(request.POST or None)
-    if form.is_valid():
-        print(form.cleaned_data)
-
-    context = {
-        'form' : form,
-        'title':"Register",
-        'btn_label' : "Register"
-    }
-    return render(request, "account/auth.html", context)
-
 def login_view(request, *args, **kwargs):
     form = AuthenticationForm(request, request.POST or None)
     if form.is_valid():
@@ -43,4 +31,20 @@ def logout_view(request, *args, **kwargs):
         'btn_label' : "Logout"
     }
 
+    return render(request, "account/auth.html", context)
+
+def register_view(request, *args, **kwargs):
+    form = UserCreationForm(request.POST or None)
+    if form.is_valid():
+        print(form.cleaned_data)
+        user = form.save(commit=True)
+        user.set_password(form.cleaned_data.get("password1"))
+        login(request, user)
+        return redirect('/') 
+
+    context = {
+        'form' : form,
+        'title':"Register",
+        'btn_label' : "Register"
+    }
     return render(request, "account/auth.html", context)
