@@ -12,4 +12,5 @@ Check Test case `test.py`
 
 ```bash
     python manage.py test
+    python manage.py test <APP_NAME>
 ```
