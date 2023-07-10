@@ -12,10 +12,10 @@ class TweetLike(models.Model):
 
 class TweetModel(models.Model):
     parent = models.ForeignKey("self", on_delete=models.SET_NULL, null=True)
-    user = models.ForeignKey(User, on_delete=models.CASCADE)
+    user = models.ForeignKey(User, on_delete=models.CASCADE, related_name="tweets")
     content = models.TextField(max_length=250,  null=True, blank=True)
     image = models.FileField( upload_to='images/', blank=True, null= True)
-    likes = models.ManyToManyField(User, related_name='tweet_like', through="TweetLike", blank=True)
+    likes = models.ManyToManyField(User, related_name='tweet_user', through="TweetLike", blank=True)
     timestamp = models.DateTimeField(auto_now=True)
 
     class Meta:

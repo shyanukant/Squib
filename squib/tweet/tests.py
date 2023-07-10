@@ -33,12 +33,21 @@ class tweetTestCase(TestCase):
         self.assertEqual(response.status_code, 200)
         self.assertEqual(len(response.json()), 3)
 
+    def test_tweet_related_name(self):
+        user = self.user
+        self.assertEqual(user.tweets.count(), 2)
+
     def test_tweet_action_like(self):
         client = self.get_client()
         response = client.post('/api/tweets/action/', {'id': 2, 'action': 'like'})
         self.assertEqual(response.status_code, 200)
         like_count = response.json().get("likes")
         self.assertEqual(like_count, 1)
+        user = self.user
+        my_like_instance_count = user.tweetlike_set.count()
+        self.assertEqual(my_like_instance_count, 1)
+        my_like_related = user.tweet_user.count()
+        self.assertEqual(my_like_instance_count, my_like_related)
 
     def test_tweet_action_unlike(self):
         client = self.get_client()
@@ -69,7 +78,7 @@ class tweetTestCase(TestCase):
     def test_api_tweet_detail(self):
         client = self.get_client()
         response = client.get('/api/tweets/2/')
-        self.assertEqual(response.status_code, 201)
+        self.assertEqual(response.status_code, 200)
 
     def test_api_tweet_delete(self):
         client = self.get_client()
@@ -79,4 +88,4 @@ class tweetTestCase(TestCase):
         response = client.delete('/api/tweets/2/delete')
         self.assertEqual(response.status_code, 404)
         incorrect_user_response = client.delete('/api/tweets/3/delete')
-        self.assertEqual(incorrect_user_response.status_code, 401)
+        self.assertEqual(incorrect_user_response.status_code, 401) 
