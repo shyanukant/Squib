@@ -51,7 +51,8 @@ INSTALLED_APPS = [
 
     # application
     "tweet.apps.TweetConfig",
-    "account.apps.AccountConfig"
+    "account.apps.AccountConfig",
+    "profiles.apps.ProfilesConfig"
 ]
 
 MIDDLEWARE = [

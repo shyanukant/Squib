@@ -21,7 +21,7 @@ from django.urls import path, include
 from tweet.views import (
                          tweet_detail_view, 
                          tweet_list_view, 
-                         tweet_profile_view)
+                         )
 
 from account.views import (register_view,
                            login_view,
@@ -32,12 +32,14 @@ urlpatterns = [
     path("admin/", admin.site.urls),
     path("", tweet_list_view),
     path("<int:tweet_id>", tweet_detail_view),
-    path("profile/<str:username>", tweet_profile_view),
-    path("api/tweets/", include("tweet.api.urls"), name="tweets"),
-
+    # authenticattion
     path("register", register_view),
     path("login", login_view),
-    path("logout", logout_view)
+    path("logout", logout_view),
+    # user profile
+    path("profile/", include("profiles.urls")),
+    # api call
+    path("api/tweets/", include("tweet.api.urls"), name="tweets"),
 ]
 
 if settings.DEBUG:
