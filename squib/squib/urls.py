@@ -28,6 +28,7 @@ from account.views import (register_view,
                            logout_view)
 
 
+
 urlpatterns = [
     path("admin/", admin.site.urls),
     path("", tweet_list_view),
@@ -40,6 +41,7 @@ urlpatterns = [
     re_path(r"profile?/", include("profiles.urls")),
     # api call
     path("api/tweets/", include("tweet.api.urls"), name="tweets"),
+    re_path(r"api/profile?/", include("profiles.api.urls")),
 ]
 
 if settings.DEBUG:
