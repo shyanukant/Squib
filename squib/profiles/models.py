@@ -11,7 +11,7 @@ class Profile(models.Model):
     bio = models.TextField(max_length=250, null=True, blank=True)
 
     def __str__(self):
-        return self.user
+        return self.user.username
 
 def user_did_save(sender, instance, created, *args, **kwargs):
     # Profile.objects.get_or_create(user=instance)

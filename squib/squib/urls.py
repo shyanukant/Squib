@@ -17,7 +17,7 @@ Including another URLconf
 from django.conf import settings
 from django.conf.urls.static import static
 from django.contrib import admin
-from django.urls import path, include
+from django.urls import path, re_path, include
 from tweet.views import (
                          tweet_detail_view, 
                          tweet_list_view, 
@@ -37,7 +37,7 @@ urlpatterns = [
     path("login", login_view),
     path("logout", logout_view),
     # user profile
-    path("profile/", include("profiles.urls")),
+    re_path(r"profile?/", include("profiles.urls")),
     # api call
     path("api/tweets/", include("tweet.api.urls"), name="tweets"),
 ]
