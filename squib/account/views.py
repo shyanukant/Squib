@@ -21,7 +21,7 @@ def login_view(request, *args, **kwargs):
     if form.is_valid():
         user_ = form.get_user()
         login(request, user_)
-        redirect('/')  
+        return redirect('/')  
     
     context = {
         'form' : form,
@@ -34,7 +34,7 @@ def login_view(request, *args, **kwargs):
 def logout_view(request, *args, **kwargs):
     if request.method == "POST" :
         logout(request)
-        redirect("/login")
+        return redirect("/login")
     
     context = {
         'form' : None,
