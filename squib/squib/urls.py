@@ -23,6 +23,8 @@ from tweet.views import (
                          tweet_list_view, 
                          tweet_profile_view)
 
+from account.views import (register)
+
 
 urlpatterns = [
     path("admin/", admin.site.urls),
@@ -30,6 +32,8 @@ urlpatterns = [
     path("<int:tweet_id>", tweet_detail_view),
     path("profile/<str:username>", tweet_profile_view),
     path("api/tweets/", include("tweet.api.urls"), name="tweets"),
+
+    path("account/register", register)
 ]
 
 if settings.DEBUG:
