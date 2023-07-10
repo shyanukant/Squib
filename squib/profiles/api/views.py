@@ -1,9 +1,7 @@
 from rest_framework.decorators import permission_classes, api_view
-from rest_framework.authentication import SessionAuthentication
 from rest_framework.permissions import IsAuthenticated
 from rest_framework.response import Response
 from django.contrib.auth import get_user_model
-from django.conf import settings
 from ..models import Profile
 
 User = get_user_model()
