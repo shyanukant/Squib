@@ -1,5 +1,6 @@
 from django.db import models
 from django.conf import settings
+from django.db.models.signals import post_save
 
 # Create your models here.
 User = settings.AUTH_USER_MODEL
@@ -11,3 +12,10 @@ class Profile(models.Model):
 
     def __str__(self):
         return self.user
+
+def user_did_save(sender, instance, created, *args, **kwargs):
+    # Profile.objects.get_or_create(user=instance)
+    if created:
+        Profile.objects.get_or_create(user=instance)
+
+post_save.connect(user_did_save, sender=User)
