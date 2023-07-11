@@ -25,7 +25,7 @@ class Profile(models.Model):
     followers = models.ManyToManyField(User, related_name="following", blank=True)
     '''
     profile_obj.followers.all() -> all user following this profile
-    profile_obj.following.all() -> all user i follow
+    profile_obj.following.all() / user.following.all() -> all user(profile) i follow
     '''
 
     def __str__(self):

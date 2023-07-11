@@ -6,6 +6,20 @@ from ..models import TweetModel
 from ..serializer import TweetSerializer, TweetActionSerializer, TweetCreateSerializer
 
 # api views (django rest framwwrok)
+
+@api_view(['GET'])
+@permission_classes([IsAuthenticated])
+def tweet_feed(request, *args, **kwargs):
+    user = request.user
+    profiles = user.following.all()
+    followed_user_id = []
+    if profiles.exists():
+        followed_user_id = [x.id for x in profiles]
+    followed_user_id.append(user.id)
+    qs = TweetModel.objects.filter(user__id__in = followed_user_id).order_by("-timestamp")
+    serializer = TweetSerializer(qs, many=True)
+    return Response(serializer.data, status=200)
+
 @api_view(['GET'])
 def tweet_list(request):
     qs = TweetModel.objects.all()
