@@ -3,6 +3,27 @@ import { useState, useEffect } from "react";
 import { ActionBtn } from "./button";
 // tweet container ->
 
+function UserPicture(props){
+    const {user} = props
+    return <div className="">
+    <span className="border rounded-circle bg-dark text-white px-3 py-2 mx-1">{user.first_name[0]}</span>
+</div>
+}
+
+function UserLink(props){
+    const {user, inCludeFullName} = props
+    const nameDisplay = inCludeFullName === true ? `${user.first_name} ${user.last_name}` : null
+
+    const handleUserLink = (event) =>{
+        window.location.href = `/profile/${user.username}`
+    }
+    return <React.Fragment>
+        { nameDisplay }
+        <span onClick={handleUserLink}>@{user.username}</span>
+
+    </React.Fragment>
+}
+
 export function ParentTweet(props) {
     const { tweet } = props
     return tweet.parent ? <Tweet hideAction isRetweet reTweeter={props.reTweeter} className={''} tweet={tweet.parent}  /> : null
@@ -42,17 +63,13 @@ export function Tweet(props) {
     }
 
     return <div className={className}>
-        {isRetweet === true && <div className="mb-2"><span className="small text-muted">Retweet via @{reTweeter.username}</span></div>}
+        {isRetweet === true && <div className="mb-2"><span className="small text-muted">Retweet via <UserLink user={reTweeter} /> </span></div>}
         <div className="d-flex ">
-            <div className="">
-                <span className="border rounded-circle bg-dark text-white px-3 py-2 mx-1">{tweet.user.first_name[0]}</span>
-            </div>
+            <UserPicture user={tweet.user} />
             <div className="col-11 ">
                 <div>
                     <p>
-                        {tweet.user.first_name}{" "}
-                        {tweet.user.last_name}{" "}
-                        @{tweet.user.username}
+                        <UserLink inCludeFullName user={tweet.user} />
                     </p>
                     <p>{tweet.content}</p>
                     <ParentTweet tweet={tweet} reTweeter={tweet.user} />
