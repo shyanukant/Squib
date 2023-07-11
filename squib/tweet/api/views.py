@@ -11,12 +11,7 @@ from ..serializer import TweetSerializer, TweetActionSerializer, TweetCreateSeri
 @permission_classes([IsAuthenticated])
 def tweet_feed(request, *args, **kwargs):
     user = request.user
-    profiles = user.following.all()
-    followed_user_id = []
-    if profiles.exists():
-        followed_user_id = [x.id for x in profiles]
-    followed_user_id.append(user.id)
-    qs = TweetModel.objects.filter(user__id__in = followed_user_id).order_by("-timestamp")
+    qs = TweetModel.objects.get_feed(user)
     serializer = TweetSerializer(qs, many=True)
     return Response(serializer.data, status=200)
 
@@ -26,7 +21,7 @@ def tweet_list(request):
     # tweet limitation according to user
     username = request.GET.get('username')
     if username != None:
-        qs = qs.filter(user__username__iexact=username)
+        qs = qs.by_username(username)
     serializer = TweetSerializer(qs, many=True)
     return Response(serializer.data)
 
