@@ -64,6 +64,9 @@ MIDDLEWARE = [
     "django.contrib.auth.middleware.AuthenticationMiddleware",
     "django.contrib.messages.middleware.MessageMiddleware",
     "django.middleware.clickjacking.XFrameOptionsMiddleware",
+
+    # custom middlware for request user (signal)
+    "profiles.get_request.RequestMiddleware",
 ]
 
 ROOT_URLCONF = "squib.urls"

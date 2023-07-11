@@ -3,6 +3,9 @@ from django.conf import settings
 from django.db.models.signals import post_save, m2m_changed
 from django.core.validators import URLValidator
 from django.dispatch import receiver
+from django.core.signals import request_finished
+from django.contrib import messages # display messages
+from .get_request import get_current_request
 
 # Create your models here.
 User = settings.AUTH_USER_MODEL
@@ -39,7 +42,13 @@ post_save.connect(user_did_save, sender=User)
 @receiver(m2m_changed, sender=Profile.followers.through)
 def followers_changed(sender, instance, action, pk_set, **kwargs):
     # check if the action is adding or removing followers and pk_set (primary key's of followers)
-    if action == "post_add":
-        print(f"{instance} gained {len(pk_set)} new follower")
-    elif action == "post_remove":
-        print(f"{instance} lost {len(pk_set)} follower")
+    request = get_current_request()
+    if request : 
+        # add a success message
+        if action == "post_add":
+            print(f"{instance} gained {len(pk_set)} new follower (s)")
+            messages.success(request, f"You gained {len(pk_set)} new follower(s)")
+        elif action == "post_remove":
+            print(f"{instance} loss {len(pk_set)} new follower (s)")
+            # add a warning message
+            messages.warning(request, f"You lost {len(pk_set)} follower(s)")
