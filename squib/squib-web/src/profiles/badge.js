@@ -1,4 +1,5 @@
 import React, {useEffect, useState} from "react";
+import { DisplayCount } from "./utils";
 import { apiProfileDetail, apiFollowToggle } from "./lookup";
 import { UserDisplay, UserPicture } from "./component";
 
@@ -18,6 +19,11 @@ export function ProfileBadge(props){
     return user ? <div>
         <UserPicture user={user} hideLink/> 
         <p><UserDisplay user={user} inCludeFullName hideLink /></p>
+        <p><DisplayCount>{user.follower_count}</DisplayCount>{user.following_count === 1 ? " Follower" : " Followers"}</p>
+        <p><DisplayCount>{user.following_count}</DisplayCount> Following</p>
+        <p>{user.bio}</p>
+        <p>{user.location}</p>
+        <p><a href={user.link}>{user.link}</a></p>
         <button className="btn btn-primary"
         onClick={handleBadgeBtn}>
             {currentFollowStatus}
