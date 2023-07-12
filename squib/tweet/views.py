@@ -1,6 +1,9 @@
 from django.shortcuts import render, redirect
 
 # Local views 
+def home_feed_view(request, *args, **kwargs):
+     return render(request, "pages/feed.html")
+
 def tweet_detail_view(request, tweet_id, *args, **kwargs):
     return render(request, "tweets/detail.html", context={"tweet_id" : tweet_id})
 
