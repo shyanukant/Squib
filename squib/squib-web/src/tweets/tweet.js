@@ -3,23 +3,30 @@ import { useState, useEffect } from "react";
 import { ActionBtn } from "./button";
 // tweet container ->
 
+function UserLink(props){
+    const {username} = props
+    const handleUserLink = (event) =>{
+        window.location.href = `/profile/${username}`
+    }
+    return <span className="pointer" onClick={handleUserLink}>
+        {props.children}
+
+    </span>
+}
 function UserPicture(props){
     const {user} = props
-    return <div className="">
-    <span className="border rounded-circle bg-dark text-white px-3 py-2 mx-1">{user.first_name[0]}</span>
-</div>
+    return <UserLink username={user.username}>
+        <span className="border rounded-circle bg-dark text-white px-3 py-2 mx-1">{user.first_name[0]}</span>
+        </UserLink>
 }
 
-function UserLink(props){
+function UserDisplay(props){
     const {user, inCludeFullName} = props
     const nameDisplay = inCludeFullName === true ? `${user.first_name} ${user.last_name}` : null
 
-    const handleUserLink = (event) =>{
-        window.location.href = `/profile/${user.username}`
-    }
     return <React.Fragment>
         { nameDisplay }
-        <span onClick={handleUserLink}>@{user.username}</span>
+        <UserLink username={user.username}><span>@{user.username}</span></UserLink>
 
     </React.Fragment>
 }
@@ -63,13 +70,15 @@ export function Tweet(props) {
     }
 
     return <div className={className}>
-        {isRetweet === true && <div className="mb-2"><span className="small text-muted">Retweet via <UserLink user={reTweeter} /> </span></div>}
+        {isRetweet === true && <div className="mb-2"><span className="small text-muted">Retweet via <UserDisplay user={reTweeter} /> </span></div>}
         <div className="d-flex ">
+        <div className="">
             <UserPicture user={tweet.user} />
+        </div>
             <div className="col-11 ">
                 <div>
                     <p>
-                        <UserLink inCludeFullName user={tweet.user} />
+                        <UserDisplay inCludeFullName user={tweet.user} />
                     </p>
                     <p>{tweet.content}</p>
                     <ParentTweet tweet={tweet} reTweeter={tweet.user} />
