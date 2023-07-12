@@ -2,13 +2,20 @@ import React from 'react';
 import ReactDOM from 'react-dom/client';
 import './index.css';
 // import App from './App';
-import { TweetComponent, TweetDetailComponent } from './tweets';
+import { TweetComponent, FeedComponent, TweetDetailComponent } from './tweets';
 import reportWebVitals from './reportWebVitals';
 
 const tweetEl = document.getElementById('root');
 if (tweetEl) {
     ReactDOM.createRoot(tweetEl).render(
         <TweetComponent {...tweetEl.dataset} />
+    );
+}
+
+const feedtweetEl = document.getElementById('feed');
+if (feedtweetEl) {
+    ReactDOM.createRoot(feedtweetEl).render(
+        <FeedComponent {...feedtweetEl.dataset} />
     );
 }
 

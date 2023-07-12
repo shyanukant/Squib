@@ -1,9 +1,9 @@
 import React from "react";
 import { useState, useEffect } from "react";
 import { Tweet } from "./tweet";
-import { apiLoadTweets } from "./lookup";
+import { apiFeedTweets } from "./lookup";
 
-export function TweetList(props) {
+export function FeedList(props) {
     // console.log(1, props.newTweets)
     const [tweets, setTweets] = useState([])
     const [nextUrl, setNextUrl] = useState(null)
@@ -22,12 +22,11 @@ export function TweetList(props) {
                         setTweets(response.results)
                         setNextUrl(response.next)
                     }
-                } 
-                else {
+                }else {
                     alert("There was an error!!");
                 }
             };
-            apiLoadTweets(props.username, handleTweetListLookup);
+            apiFeedTweets(handleTweetListLookup);
         }
     }, [tweets, props.username]);
     console.log(tweets)
@@ -42,13 +41,12 @@ export function TweetList(props) {
             const handleLoadNextResponse = (response, status) => {
                 if (status === 200){
                     setTweets([...tweets, ...response.results])
-                    setNextUrl(response.next)
-                } 
-                else {
-                alert("There was an error!!");
-            }
+                    setNextUrl(response.next) }
+            //     } else {
+            //     alert("There was an error!!");
+            // }
             };
-            apiLoadTweets(props.username, handleLoadNextResponse, nextUrl)
+            apiFeedTweets(handleLoadNextResponse, nextUrl)
         }
     }
 

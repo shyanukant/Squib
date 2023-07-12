@@ -19,6 +19,14 @@ export function apiLoadTweets(username , callback, nextUrl) {
     BackendLookup('GET', endpoint , callback)
     }
 
+export function apiFeedTweets(callback, nextUrl) {
+    let endpoint = 'tweets/feed'
+    if (nextUrl !== null && nextUrl !== undefined){
+        endpoint = nextUrl.replace("http://localhost:8000/api/", "")
+    }
+    BackendLookup('GET', endpoint , callback)
+    }
+
 export function apiTweetDetail(tweetId, callback){
     BackendLookup('GET', `tweets/${tweetId}/`, callback)
 }
