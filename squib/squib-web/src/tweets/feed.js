@@ -29,7 +29,6 @@ export function FeedList(props) {
             apiFeedTweets(handleTweetListLookup);
         }
     }, [tweets, props.username]);
-    console.log(tweets)
 
     const handleDidRetweet = (newRetweet) => {
         setTweets((prevTweets) => [newRetweet, ...prevTweets]);

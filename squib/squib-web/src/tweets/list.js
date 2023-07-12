@@ -30,7 +30,6 @@ export function TweetList(props) {
             apiLoadTweets(props.username, handleTweetListLookup);
         }
     }, [tweets, props.username]);
-    console.log(tweets)
 
     const handleDidRetweet = (newRetweet) => {
         setTweets((prevTweets) => [newRetweet, ...prevTweets]);
