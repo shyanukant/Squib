@@ -40,11 +40,17 @@ def update_profile_view(request, *args, **kwargs):
 
 def profile_view(request, username, *args, **kwargs):
     qs = Profile.objects.filter(user__username = username)
+    is_following = False
+    user = request.user
     if not qs.exists():
         raise Http404
     profile_obj = qs.first()
+    if user.is_authenticated:
+        is_following = user in profile_obj.followers.all()
+
     context = {
         "username" : username,
-        "profile" : profile_obj
+        "profile" : profile_obj,
+        "is_following" : is_following
     }
     return render(request, "profiles/profile.html", context)

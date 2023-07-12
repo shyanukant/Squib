@@ -2,6 +2,7 @@ from rest_framework.decorators import permission_classes, api_view
 from rest_framework.permissions import IsAuthenticated
 from rest_framework.response import Response
 from django.contrib.auth import get_user_model
+from ..serializer import PublicProfileSerializers
 from ..models import Profile
 
 User = get_user_model()
@@ -10,6 +11,16 @@ User = get_user_model()
 # @permission_classes([IsAuthenticated])
 # def user_profile_detail_view(request, username, *args, **kwargs):
 #     current_user = request.user
+
+@api_view(["GET"])
+def user_profile_detail_view(request, username, *args, **kwargs):
+    qs = Profile.objects.filter(user__username = username)
+    if not qs.exists():
+        return Response({"details": "User not found"}, status=404)
+    
+    profile_obj = qs.first()
+    data = PublicProfileSerializers(instance=profile_obj, context = {"request": request})
+    return Response(data.data, status=200)
 
 
 @api_view(["GET", "POST"])
