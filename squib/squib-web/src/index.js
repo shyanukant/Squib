@@ -2,6 +2,7 @@ import React from 'react';
 import ReactDOM from 'react-dom/client';
 import './index.css';
 // import App from './App';
+import { ProfileBadgeComponent } from './profiles';
 import { TweetComponent, FeedComponent, TweetDetailComponent } from './tweets';
 import reportWebVitals from './reportWebVitals';
 
@@ -26,6 +27,16 @@ if (tweetDetailEl) {
             <TweetDetailComponent {...container.dataset} />
         );
     });
+}
+
+const profileBadgeEl = document.querySelectorAll(".profile-badge");
+if (profileBadgeEl){
+    profileBadgeEl.forEach(container => {
+        ReactDOM.createRoot(container).render(
+            <ProfileBadgeComponent {...container.dataset}/>
+            );
+    });
+    
 }
 
 // If you want to start measuring performance in your app, pass a function
