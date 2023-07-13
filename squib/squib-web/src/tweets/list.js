@@ -56,8 +56,8 @@ export function TweetList(props) {
             key={`${index}-{item.id}`}
             tweet={item}
             didRetweet={handleDidRetweet}
-            className='my-5 py-5 border bg-white text-dark' />
+            className='my-5 py-5 border-2' />
     })};
-    { nextUrl !== null && <button className="btn btn-outline-primary" onClick={handleLoadNext}>Load Next</button>}
+    { nextUrl !== null && <button className="border-4 ring-2 ring-blue-300 hover:ring-blue-500" onClick={handleLoadNext}>Load Next</button>}
     </React.Fragment>
 }

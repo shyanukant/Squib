@@ -54,8 +54,8 @@ export function FeedList(props) {
             key={`${index}-{item.id}`}
             tweet={item}
             didRetweet={handleDidRetweet}
-            className='my-5 py-5 border bg-white text-dark' />
+            className='my-5 py-5 border-2 ' />
     })};
-    { nextUrl !== null && <button className="btn btn-outline-primary" onClick={handleLoadNext}>Load Next</button>}
+    { nextUrl !== null && <button className="bg-violet-500 text-white py-2 px-4 shadow-lg shadow-violet-300 hover:bg-violet-600 rounded-xl" onClick={handleLoadNext}>Load Next</button>}
     </React.Fragment>
 }

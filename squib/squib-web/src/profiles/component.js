@@ -6,23 +6,25 @@ export function UserLink(props){
     const handleUserLink = (event) =>{
         window.location.href = `/profile/${username}`
     }
-    return <span className="pointer" onClick={handleUserLink}>
+    return <span className="font-light cursor-pointer" onClick={handleUserLink}>
         {props.children}
 
     </span>
 }
 export function UserPicture(props){
-    const {user, hidelink} = props
-    const userPicSpan = <span className="border rounded-circle bg-dark text-white px-3 py-2 mx-1">{user.first_name[0]}</span>
+    const {user, hidelink, className} = props
+    const picClassName = "rounded-full bg-gradient-to-r from-sky-500 to-indigo-500 text-white px-3 py-2 mx-1"
+
+    const userPicSpan = <span className={className ? className +picClassName : picClassName}>{user.first_name[0]}</span>
     return hidelink ? `@${user.name}` : <UserLink username={user.username}> 
             {userPicSpan}
         </UserLink>
 }
 
 export function UserDisplay(props){
-    const {user, inCludeFullName, hideLink} = props
-    const nameDisplay = inCludeFullName === true ? `${user.first_name} ${user.last_name} ` : null
-    const userDisplaySpan = <span>@{user.username}</span>
+    const {user, inCludeFullName, hideLink, className} = props
+    const nameDisplay = inCludeFullName === true ? <h3 className= {className}>{(user.first_name)} {user.last_name} </h3> : null
+    const userDisplaySpan = <span className="font-light">@{user.username}</span>
 
     return <React.Fragment>
         { nameDisplay }

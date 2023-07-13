@@ -2,11 +2,11 @@ import React from "react";
 import { apiActionTweet } from "./lookup";
 
 export function ActionBtn(props) {
-    const { tweet, didPerformAction, action } = props ;
+    const { tweet, didPerformAction, action, display } = props ;
     const likes = tweet.likes ? tweet.likes : 0;
 
-    const className = props.className ? props.className : 'btn btn-primary'
-    const dsiplay = action.type === "like" ? `${likes} ${action.display}` : action.display;
+    const actionDisplay = action === "like" ? <span className="flex"> {likes} {display} </span> : display;
+    // const actionDisplay = action.type === "like" ? display : action.dsiplay;
 
     const handleActionBackendEvent = (response, status) => {
         // console.log(response, status)
@@ -17,7 +17,7 @@ export function ActionBtn(props) {
 
     const handleClick = (event) => {
         event.preventDefault()
-        apiActionTweet(tweet.id, action.type, handleActionBackendEvent);
+        apiActionTweet(tweet.id, action, handleActionBackendEvent);
     }
-    return <button className={className} onClick={handleClick}> {dsiplay}</button>
+    return <button className="mr-6" onClick={handleClick}> {actionDisplay}</button>
 }

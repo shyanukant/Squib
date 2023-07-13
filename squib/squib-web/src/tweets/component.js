@@ -37,10 +37,10 @@ export function TweetComponent(props) {
     }, [newTweets])
 
     return <div className={props.className}>
-        { canTweet === true && <div className="col-12 my-5 ">
+        { canTweet === true && <div className="col-span-12 my-5 ">
             <form onSubmit={handleSubmit}>
-                <textarea className="form-control" name="message" ref={textAreaRef} required={true}></textarea><br />
-                <button className="btn btn-primary" name="Tweet" >Tweet</button>
+                <textarea className="border-4" name="message" ref={textAreaRef} required={true}></textarea><br />
+                <button className="bg-indigo-500 shadow-lg shadow-indigo-500/50 px-4 py-2 rounded-xl text-white hover:bg-indigo-600 text-xs" name="Tweet" >Tweet</button>
             </form>
         </div>
         }
@@ -80,10 +80,10 @@ export function FeedComponent(props) {
     }, [newTweets])
 
     return <div className={props.className}>
-        { canTweet === true && <div className="col-12 my-5 ">
+        { canTweet === true && <div className="col-span-12 my-5 ">
             <form onSubmit={handleSubmit}>
-                <textarea className="form-control" name="message" ref={textAreaRef} required={true}></textarea><br />
-                <button className="btn btn-primary" name="Tweet" >Tweet</button>
+                <textarea className="border-2 rounded-lg shadow-lg p-3 border-gray-200" name="message" ref={textAreaRef} required={true}></textarea><br />
+                <button className="float-right bg-indigo-500 shadow-lg shadow-indigo-500/50 px-4 py-2 rounded-2xl text-white hover:bg-indigo-600" name="Tweet" >Tweet</button>
             </form>
         </div>
         }
