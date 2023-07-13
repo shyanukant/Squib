@@ -36,9 +36,9 @@ urlpatterns = [
     path("global/", tweet_list_view),
     path("<int:tweet_id>", tweet_detail_view),
     # authenticattion
-    path("register", register_view),
-    path("login", login_view),
-    path("logout", logout_view),
+    path("register", register_view, name="register"),
+    path("login", login_view, name='login'),
+    path("logout", logout_view, name="logout"),
     # user profile
     re_path(r"profile?/", include("profiles.urls")),
     # api call
