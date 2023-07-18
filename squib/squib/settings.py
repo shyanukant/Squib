@@ -10,29 +10,34 @@ For the full list of settings and their values, see
 https://docs.djangoproject.com/en/4.2/ref/settings/
 """
 import os
+import dotenv
 from pathlib import Path
 
 # Build paths inside the project like this: BASE_DIR / 'subdir'.
 BASE_DIR = Path(__file__).resolve().parent.parent
-
+# Enviremental viariable path
+ENV_PATH = os.path.join(BASE_DIR, '.env')
+# Load enviroment variables from a ".env"-file if it exists (e.g
+if os.path.isfile(ENV_PATH):
+    dotenv.load_dotenv(ENV_PATH)
 
 # Quick-start development settings - unsuitable for production
 # See https://docs.djangoproject.com/en/4.2/howto/deployment/checklist/
 
 # SECURITY WARNING: keep the secret key used in production secret!
-SECRET_KEY = "django-insecure-%)!4*ljjlk%v&$@01+%8gvivxgv4xbs_t0w3n$+455r=1$j6yl"
+SECRET_KEY = os.environ["SECRET_KEY"]
 
 # SECURITY WARNING: don't run with debug turned on in production!
-DEBUG = True
+DEBUG = os.environ.get("DEBUG", False)
 
 # App name
 APP_NAME = 'squib'
+ALLOWED_HOSTS = os.environ.get("ALLOWED_HOSTS", "").split(',')
 
 # Tweet Custom Setting
 MAX_TWEET_LENGTH = 250
 TWEET_ACTION_OPTIONS = ['like', 'unlike', 'retweet']
 
-ALLOWED_HOSTS = ['*', 'localhost']
 LOGIN_URL = "/login"
 
 # Application definition
@@ -162,10 +167,10 @@ DEFAULT_RENDERER_CLASSES = [
 DEFAULT_AUTHENTICATION_CLASSES = ['rest_framework.authentication.SessionAuthentication']
 if DEBUG:
     DEFAULT_RENDERER_CLASSES += ['rest_framework.renderers.BrowsableAPIRenderer']
-    DEFAULT_AUTHENTICATION_CLASSES += [
-        # custom authentication
-        'squib.rest_api.dev.DevAuthentication'
-    ]
+    # DEFAULT_AUTHENTICATION_CLASSES += [
+    #     # custom authentication
+    #     'squib.rest_api.dev.DevAuthentication'
+    # ]
 
 REST_FRAMEWORK = {
     'DEFAULT_AUTHENTICATION_CLASSES': DEFAULT_AUTHENTICATION_CLASSES,
