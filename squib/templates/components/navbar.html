@@ -1,32 +1,39 @@
-<nav class="w-1/4 bg-gray-800 text-white">
-  <!-- Logo  -->
-  <div class="p-4 cursor-pointer">
-    <a class="text-xl font-bold" href="#">Squib</a>
+<style>
+  a:hover{
+    background-color: gray;
+  }
+</style>
+  <div class=" bg-secondary d-flex flex-column px-8 h-100 w-25 top-0 " style="position: fixed; left: 0;">
+    <h1 class="fw-medium border-top d-flex align-items-center fs-5 px-4 py-8 mt-4 text-white">Squib</h1>
+    <nav class="overflow-auto pt-4 d-flex justify-content-between flex-column h-75">
+      <ul class="list-unstyled">
+        <li class="m-4 icon-link-hover">
+          <a href="/" class="text-white d-flex align-content-center justify-content-center overflow-hidden p-2 gap-4 rounded">
+            Home
+          </a>
+        </li>
+        <li class="m-4">
+          <a class="text-white d-flex align-content-center justify-content-center overflow-hidden p-2 gap-4 rounded" href="{% url 'profile' user.username %}" class="active">
+            Profile
+          </a>
+        </li>
+
+        <li class="m-4">
+          <a class="text-white d-flex align-content-center justify-content-center overflow-hidden p-2 gap-4 rounded" href="{% url 'edit' %}" class="active">
+            Edit
+          </a>
+        </li>
+      </ul>
+      <!-- drop down  -->
+      
+        <ul class="m-4">
+          <li><a class="text-white d-flex align-content-center justify-content-center overflow-hidden p-2 rounded" href="{% url 'logout' %}">Logout</a></li>
+          
+        </ul>
+      
+    </nav>
   </div>
-  <!-- Navigation items  -->
-  <div>
-    <ul class="py-4 ">
-      <li class="pl-4 py-2">
-        <a class="" aria-current="page" href="#">Home</a>
-      </li>
-      <li class="pl-4 py-2">
-        <!-- Setting -->
-        <div class="relative">
-          <span class="flex items-center cursor-pointer">
-            Settings
-            <svg xmlns="http://www.w3.org/2000/svg" class="h-4 w-4 ml-1" viewBox="0 0 20 20" fill="currentColor">
-              <path fill-rule="evenodd"
-                d="M8 1a1 1 0 00-.707.293l-3 3a1 1 0 000 1.414l8 8a1 1 0 001.414 0l3-3A1 1 0 0017 9V3a1 1 0 00-1-1H8zm1 10a2 2 0 100-4 2 2 0 000 4z"
-                clip-rule="evenodd" />
-            </svg>
-          </span>
-          <!-- dropdown content  -->
-          <ul class="absolute bg-gray-600 rounded mt-2 py-2 hidden">
-            <li class="pl-4 py-2">Profile</li>
-            <li class="pl-4 py-2">Logout</li>
-          </ul>
-        </div>
-      </li>
-    </ul>
-  </div>
-</nav>
+
+  <!-- Add Bootstrap JS (Popper.js is no longer required) -->
+  <script src="https://cdnjs.cloudflare.com/ajax/libs/bootstrap/5.3.0/js/bootstrap.bundle.min.js"></script>
+

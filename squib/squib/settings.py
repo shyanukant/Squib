@@ -40,6 +40,11 @@ TWEET_ACTION_OPTIONS = ['like', 'unlike', 'retweet']
 
 LOGIN_URL = "/login"
 
+#Form template
+CRISPY_ALLOWED_TEMPLATE_PACKS = "bootstrap5"
+
+CRISPY_TEMPLATE_PACK = "bootstrap5"
+
 # Application definition
 
 INSTALLED_APPS = [
@@ -53,6 +58,8 @@ INSTALLED_APPS = [
     # extension/ libraries
     "rest_framework",
     "corsheaders",
+    "crispy_forms",
+    "crispy_bootstrap5",
 
     # application
     "tweet.apps.TweetConfig",

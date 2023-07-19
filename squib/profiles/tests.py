@@ -33,10 +33,9 @@ class ProfileTestCase(TestCase):
     
     def test_follow_api_endpoint(self):
         client = self.get_client()
-        response = client.post(f"/api/profile/{self.user2.username}/follow", {"action":"follow"})
-        print(response)
+        response = client.post(f"/api/profile/{self.user2.username}/follow/", {"action":"follow"})
         r_data = response.json()
-        count = r_data.get("followers")
+        count = r_data.get("follower_count")
         self.assertEqual(count, 1)
 
     def test_unfollow_api_endpoint(self):
@@ -45,14 +44,14 @@ class ProfileTestCase(TestCase):
         first.profile.followers.add(second)
 
         client = self.get_client()
-        response = client.post(f"/api/profile/{second.username}/follow", {"action":"unfollow"})
+        response = client.post(f"/api/profile/{second.username}/follow/", {"action":"unfollow"})
         r_data = response.json()
-        count = r_data.get("followers")
+        count = r_data.get("follower_count")
         self.assertEqual(count, 0)
 
     def test_cannot_follow_api_endpoint(self):
         client = self.get_client()
-        response = client.post(f"/api/profile/{self.user1.username}/follow", {"action":"follow"})
+        response = client.post(f"/api/profile/{self.user1.username}/follow/", {"action":"follow"})
         r_data = response.json()
-        count = r_data.get("followers")
+        count = r_data.get("follower_count")
         self.assertEqual(count, 0)
