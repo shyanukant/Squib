@@ -1,11 +1,12 @@
 {% extends "base.html" %}
 
 {% block content %}
+{% if user.is_authenticated %}
 <div 
     class='tweet-detail' 
     data-tweet-id='{{ tweet_id }}'
     data-class-name='col-6 mx-auto' >
 
 </div>
-
+{% endif %}
 {% endblock %}

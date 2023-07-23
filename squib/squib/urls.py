@@ -19,9 +19,8 @@ from django.conf.urls.static import static
 from django.contrib import admin
 from django.urls import path, re_path, include
 from tweet.views import (
-                        home_feed_view,
+                        tweet_list_view,
                          tweet_detail_view, 
-                         tweet_list_view, 
                          )
 
 from account.views import (register_view,
@@ -32,8 +31,8 @@ from account.views import (register_view,
 
 urlpatterns = [
     path("admin/", admin.site.urls),
-    path("", home_feed_view),
-    path("global/", tweet_list_view),
+    path("", tweet_list_view),
+    # path("feed/", feed_view),
     path("<int:tweet_id>", tweet_detail_view),
     # authenticattion
     path("register", register_view, name="register"),

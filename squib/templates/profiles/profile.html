@@ -12,8 +12,8 @@
 </div>
 {% endif %}
 
-<div class="profile-badge" data-username="{{ username }}"></div>
-<div id="root" data-username="{{ username }}" data-can-tweet="false">
+<div class="profile-badge" data-username="{{ username }}" data-current-user="{{ user }}"></div>
+<div id="root" data-username="{{ profile }}" data-can-tweet="false">
 </div>
 
 {% endblock %}

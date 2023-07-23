@@ -48,7 +48,9 @@ def profile_view(request, username, *args, **kwargs):
     if user.is_authenticated:
         is_following = user in profile_obj.followers.all()
 
+    print(f" current user : {user.username}, profile : {profile_obj}")
     context = {
+        "currentUser" : user.username,
         "username" : username,
         "profile" : profile_obj,
         "is_following" : is_following

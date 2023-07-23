@@ -8,7 +8,7 @@ from ..models import Profile
 User = get_user_model()
 
 @api_view(["GET", "POST"])
-# @permission_classes([IsAuthenticated])
+@permission_classes([IsAuthenticated])
 def user_profile_detail_view(request, username, *args, **kwargs):
     qs = Profile.objects.filter(user__username = username)
     me = request.user

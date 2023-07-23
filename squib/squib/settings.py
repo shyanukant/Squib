@@ -162,16 +162,23 @@ DEFAULT_AUTO_FIELD = "django.db.models.BigAutoField"
 # CSRF_TRUSTED_ORIGINS = ['http://localhost:8000', 'http://localhost:3000']
 
 # CROSS ORIGIN RESOURCE SARING: This allows in-browser requests to your Django application from other origins.
-CORS_ALLOW_ALL_ORIGINS = True
-CORS_ALLOW_CREDENTIALS = False
+CORS_ALLOWED_ORIGINS = [
+    "http://localhost:8000",
+    "http://127.0.0.1:8000",
+    'http://localhost:3000'
+    # Add other allowed origins if needed
+]
+# CORS_ALLOW_ALL_ORIGINS = True
+CORS_ALLOW_CREDENTIALS = True
 CORS_ALLOW_HEADERS = ['*'] 
-# CORS_ALLOWED_ORIGINS = ["https://*.preview.app.github.dev"]
 CORS_URLS_REGEX = r"^/api/.*$"
-
+AUTHENTICATION_BACKENDS = [
+    'django.contrib.auth.backends.ModelBackend',  # Default model-based authentication backend
+]
 DEFAULT_RENDERER_CLASSES = [
         'rest_framework.renderers.JSONRenderer',
     ]
-DEFAULT_AUTHENTICATION_CLASSES = ['rest_framework.authentication.SessionAuthentication']
+DEFAULT_AUTHENTICATION_CLASSES = ['rest_framework.authentication.BasicAuthentication','rest_framework.authentication.SessionAuthentication']
 if DEBUG:
     DEFAULT_RENDERER_CLASSES += ['rest_framework.renderers.BrowsableAPIRenderer']
     # DEFAULT_AUTHENTICATION_CLASSES += [

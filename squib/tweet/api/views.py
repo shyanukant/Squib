@@ -3,7 +3,7 @@ from rest_framework.response import Response
 from rest_framework.decorators import api_view, permission_classes
 from rest_framework.permissions import IsAuthenticated
 from rest_framework.pagination import PageNumberPagination
-from ..models import TweetModel
+from ..models import TweetModel, TweetQuerySet
 from ..serializer import TweetSerializer, TweetActionSerializer, TweetCreateSerializer
 
 # api views (django rest framwwrok)
@@ -20,6 +20,7 @@ def get_paginated_queryset_response(request, qs, *args, **kwargs):
 def tweet_feed(request, *args, **kwargs):
     user = request.user     
     qs = TweetModel.objects.get_feed(user)
+    print("feed", qs)
     return get_paginated_queryset_response(request, qs)
 
 @api_view(['GET'])
@@ -53,7 +54,7 @@ def create_tweet(request, *args, **kwargs):
         return Response(serializer.data, status=201)
     return Response({}, status=400)
 
-@api_view(['GET', 'DELETE', 'POST'])
+@api_view(['GET', 'DELETE',  'POST'])
 @permission_classes([IsAuthenticated])
 def delete_tweet(request, tweet_id, *args, **kwargs):
     qs = TweetModel.objects.filter(id = tweet_id)

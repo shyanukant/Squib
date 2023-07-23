@@ -3,37 +3,44 @@
     background-color: gray;
   }
 </style>
-  <div class=" bg-secondary d-flex flex-column px-8 h-100 w-25 top-0 " style="position: fixed; left: 0;">
-    <h1 class="fw-medium border-top d-flex align-items-center fs-5 px-4 py-8 mt-4 text-white">Squib</h1>
-    <nav class="overflow-auto pt-4 d-flex justify-content-between flex-column h-75">
+  <div class=" bg-dark d-flex flex-column px-8 h-100 w-25 top-0 " style="position: fixed; left: 0;">
+    <h1 class="fw-medium border-top d-flex align-items-center fs-3 px-4 py-8 mt-4 text-white">Squib</h1>
+    <nav class="overflow-auto pt-4 d-flex justify-content-between flex-column h-75 mx-lg-5">
       <ul class="list-unstyled">
         <li class="m-4 icon-link-hover">
-          <a href="/" class="text-white d-flex align-content-center justify-content-center overflow-hidden p-2 gap-4 rounded">
-            Home
+          <a href="/" class="text-white d-flex align-content-center justify-content-center overflow-hidden p-2 gap-4 rounded fs-4">
+            <span class="material-symbols-outlined fs-2">
+              home
+              </span> Home
           </a>
         </li>
         <li class="m-4">
-          <a class="text-white d-flex align-content-center justify-content-center overflow-hidden p-2 gap-4 rounded" href="{% url 'profile' user.username %}" class="active">
-            Profile
+          <a class="text-white d-flex align-content-center justify-content-center overflow-hidden p-2 gap-4 rounded fs-4" href="{% url 'profile' user.username %}" class="active">
+            <span class="material-symbols-outlined fs-2">
+              person
+              </span> Profile
           </a>
         </li>
 
         <li class="m-4">
-          <a class="text-white d-flex align-content-center justify-content-center overflow-hidden p-2 gap-4 rounded" href="{% url 'edit' %}" class="active">
-            Edit
+          <a class="text-white d-flex align-content-center justify-content-center overflow-hidden p-2 gap-4 rounded fs-4" href="{% url 'edit' %}" class="active">
+            <span class="material-symbols-outlined fs-2">
+              edit
+              </span> Edit
           </a>
         </li>
       </ul>
-      <!-- drop down  -->
       
-        <ul class="m-4">
-          <li><a class="text-white d-flex align-content-center justify-content-center overflow-hidden p-2 rounded" href="{% url 'logout' %}">Logout</a></li>
+        <ul class="dropdown m-4">
+          <li><a class="text-white d-flex align-content-center justify-content-center overflow-hidden p-2 rounded fs-4" href="{% url 'logout' %}">Logout</a></li>
           
         </ul>
+       
+        
       
     </nav>
   </div>
 
   <!-- Add Bootstrap JS (Popper.js is no longer required) -->
-  <script src="https://cdnjs.cloudflare.com/ajax/libs/bootstrap/5.3.0/js/bootstrap.bundle.min.js"></script>
+  <script src="https://cdnjs.cloudflare.com/ajax/libs/bootstrap/5.4.0/js/bootstrap.bundle.min.js"></script>
 
