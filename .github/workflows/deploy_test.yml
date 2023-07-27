@@ -1,13 +1,13 @@
-name: Squib testing
+name: Squib deploy and test
 
 on:
   push:
-    branches: [ "main" ]
-  pull_request:
-    branches: [ "main" ]
+    branches: 
+      - main
+  
 
 jobs:
-  build:
+  deploy_and_test:
 
     runs-on: ubuntu-latest
     steps:
