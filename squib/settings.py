@@ -167,8 +167,8 @@ DEFAULT_AUTO_FIELD = "django.db.models.BigAutoField"
 CORS_ALLOWED_ORIGINS = [
     "http://localhost:8000",
     "http://127.0.0.1:8000",
-    'http://localhost:3000'
-    '.herokuapp.com'
+    'http://localhost:3000',
+    'https://squib-9e460649f0f5.herokuapp.com'
     # Add other allowed origins if needed
 ]
 # CORS_ALLOW_ALL_ORIGINS = True
