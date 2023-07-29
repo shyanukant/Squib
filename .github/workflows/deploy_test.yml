@@ -18,7 +18,7 @@ jobs:
 
       - name: Install Dependencies
         run: |
-          cd squib
+          
           python3 -m pip install --upgrade pip
           pip3 install -r requirements.txt
 
@@ -30,7 +30,7 @@ jobs:
 
       - name: Build and push Docker image
         run: |
-          cd squib
+          
           docker build -t ${{ secrets.DOCKER_USERNAME }}/squib .
           docker push ${{ secrets.DOCKER_USERNAME }}/squib
 
@@ -47,5 +47,5 @@ jobs:
         env:
           SECRET_KEY: ${{ secrets.SECRET_KEY }}
         run: |
-          cd squib
+          
           python3 manage.py test

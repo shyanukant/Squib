@@ -1,6 +1,6 @@
 FROM python:3.10
 
-WORKDIR /app/squib
+WORKDIR /app
 
 COPY requirements.txt .
 
