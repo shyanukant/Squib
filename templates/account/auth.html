@@ -5,14 +5,26 @@
 {% block content %}
 <div class="col-10 mt-5 mx-auto">
     <h1 class="fs-2"> {{ title }} </h1>
-    {% if description %}
-    <p>{{ description }}</p>
-    {% endif %}
+    {% if not request.user.is_authenticated %}
     <form action="" method="post">
         {% csrf_token %}
         {{form|crispy}}
         <button type="submit" class="btn btn-outline-success">{{ btn_label }}</button>
+    </form><br>
+    <hr><br>
+
+    <i><b>{{second_label}} </b></i><a class="btn btn-success" href="{% url second_btn  %}"> {{ second_btn.capitalize }}
+    </a>
+
+    {% else %}
+    <p>{{ description }}</p>
+    <form action="" method="post">
+        {% csrf_token %}
+        {{form|crispy}}
+        <button type="submit" class="btn btn-outline-success">{{ btn_label }}</button>
+        <button type="submit" class="btn btn-outline-danger" onclick="window.history.back()">Cancel</button>
     </form>
+    {% endif %}
 </div>
 
 {% endblock %}

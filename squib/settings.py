@@ -33,7 +33,7 @@ DEBUG = os.environ.get("DEBUG", False)
 
 # App name
 APP_NAME = 'squib'
-ALLOWED_HOSTS = [".herokuapp.com"]
+ALLOWED_HOSTS = [".herokuapp.com",  '127.0.0.1']
 
 # Tweet Custom Setting
 MAX_TWEET_LENGTH = 250

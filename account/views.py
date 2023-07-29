@@ -14,7 +14,9 @@ def login_view(request, *args, **kwargs):
     context = {
         'form' : form,
         'title' : "Login",
-        'btn_label' : "Login"
+        'btn_label' : "Login",
+        'second_btn' : "register",
+        'second_label' : "Don't have account"
     }
 
     return render(request, "account/auth.html", context) 
@@ -28,7 +30,8 @@ def logout_view(request, *args, **kwargs):
         'form' : None,
         'title':'Logout',
         'description' : 'Are you sure , you want to logout?',
-        'btn_label' : "Logout"
+        'btn_label' : "Logout",
+        
     }
 
     return render(request, "account/auth.html", context)
@@ -45,6 +48,8 @@ def register_view(request, *args, **kwargs):
     context = {
         'form' : form,
         'title':"Register",
-        'btn_label' : "Register"
+        'btn_label' : "Register",
+        'second_btn' : "login",
+        'second_label' : "Already a User"
     }
     return render(request, "account/auth.html", context)
