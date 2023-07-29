@@ -30,6 +30,7 @@ jobs:
 
       - name: Build and push Docker image
         run: |
+          cd squib
           docker build -t ${{ secrets.DOCKER_USERNAME }}/squib .
           docker push ${{ secrets.DOCKER_USERNAME }}/squib
 
