@@ -161,7 +161,7 @@ STATIC_ROOT = os.path.join(BASE_DIR / "static-root") # python manage.py collects
 DEFAULT_AUTO_FIELD = "django.db.models.BigAutoField"
 
 # ORIGINS FOR CSRF REQUEST
-# CSRF_TRUSTED_ORIGINS = ['http://localhost:8000', 'http://localhost:3000']
+CSRF_TRUSTED_ORIGINS = ['http://localhost:8000', 'http://localhost:3000', 'https://squib-9e460649f0f5.herokuapp.com']
 
 # CROSS ORIGIN RESOURCE SARING: This allows in-browser requests to your Django application from other origins.
 CORS_ALLOWED_ORIGINS = [
