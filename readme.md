@@ -45,9 +45,9 @@ python manage.py runserver
 ```
 
 ## React Setup(frontend)
-
+Frontend Repo - [checkout](https://github.com/shyanukant/squib-web)
 ```bash
-cd squib/squib-web
+cd squib-web
 ```
 
 Install react dependencies
