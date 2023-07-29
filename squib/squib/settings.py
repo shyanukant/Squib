@@ -32,7 +32,7 @@ DEBUG = os.environ.get("DEBUG", False)
 
 # App name
 APP_NAME = 'squib'
-ALLOWED_HOSTS = ['127.0.0.1','localhost']
+ALLOWED_HOSTS = [".herokuapp.com"]
 
 # Tweet Custom Setting
 MAX_TWEET_LENGTH = 250
@@ -166,6 +166,7 @@ CORS_ALLOWED_ORIGINS = [
     "http://localhost:8000",
     "http://127.0.0.1:8000",
     'http://localhost:3000'
+    '.herokuapp.com'
     # Add other allowed origins if needed
 ]
 # CORS_ALLOW_ALL_ORIGINS = True
