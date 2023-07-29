@@ -7,7 +7,6 @@ on:
 
 jobs:
   deploy:
-    needs: test  # Wait for the 'test' job to complete before starting deployment
     runs-on: ubuntu-latest
 
     steps:
