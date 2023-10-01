@@ -25,11 +25,19 @@ jobs:
           docker build -t ${{ secrets.DOCKER_USERNAME }}/squib .
           docker push ${{ secrets.DOCKER_USERNAME }}/squib
 
-      - name: Deploy to Heroku
-        env:
-          HEROKU_API_KEY: ${{ secrets.HEROKU_API_KEY }}
-          HEROKU_APP_NAME: squib
-        run: |
-          heroku container:login
-          heroku container:push web -a $HEROKU_APP_NAME
-          heroku container:release web -a $HEROKU_APP_NAME
+      - name: 'Deploy to Azure Web App'
+        uses: azure/webapps-deploy@v2
+        id: deploy-to-webapp
+        with:
+          app-name: 'squib'
+          slot-name: 'Production'
+          publish-profile: ${{ secrets.AZUREAPPSERVICE_PUBLISHPROFILE }}
+
+      # - name: Deploy to Heroku
+      #   env:
+      #     HEROKU_API_KEY: ${{ secrets.HEROKU_API_KEY }}
+      #     HEROKU_APP_NAME: squib
+      #   run: |
+      #     heroku container:login
+      #     heroku container:push web -a $HEROKU_APP_NAME
+      #     heroku container:release web -a $HEROKU_APP_NAME

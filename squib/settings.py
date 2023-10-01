@@ -33,7 +33,7 @@ DEBUG = os.environ.get("DEBUG", False)
 
 # App name
 APP_NAME = 'squib'
-ALLOWED_HOSTS = [".herokuapp.com",  '127.0.0.1']
+ALLOWED_HOSTS = [".herokuapp.com", ".azurewebsites.net" '127.0.0.1', ]
 
 # Tweet Custom Setting
 MAX_TWEET_LENGTH = 250
@@ -161,14 +161,15 @@ STATIC_ROOT = os.path.join(BASE_DIR / "static-root") # python manage.py collects
 DEFAULT_AUTO_FIELD = "django.db.models.BigAutoField"
 
 # ORIGINS FOR CSRF REQUEST
-CSRF_TRUSTED_ORIGINS = ['http://localhost:8000', 'http://localhost:3000', 'https://squib-9e460649f0f5.herokuapp.com']
+CSRF_TRUSTED_ORIGINS = ['http://localhost:8000', 'http://localhost:3000', 'https://squib-9e460649f0f5.herokuapp.com', 'https://squib.azurewebsites.net']
 
 # CROSS ORIGIN RESOURCE SARING: This allows in-browser requests to your Django application from other origins.
 CORS_ALLOWED_ORIGINS = [
     "http://localhost:8000",
     "http://127.0.0.1:8000",
     'http://localhost:3000',
-    'https://squib-9e460649f0f5.herokuapp.com'
+    'https://squib-9e460649f0f5.herokuapp.com',
+    'https://squib.azurewebsites.net'
     # Add other allowed origins if needed
 ]
 # CORS_ALLOW_ALL_ORIGINS = True
