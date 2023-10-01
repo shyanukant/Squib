@@ -8,9 +8,8 @@ on:
 jobs:
   deploy:
     runs-on: ubuntu-latest
-    environment:
-      name: 'Production'
-      url: ${{ steps.deploy-to-webapp.outputs.webapp-url }}
+    env:
+      PRODUCTION_URL: ${{ steps.deploy-to-webapp.outputs.webapp-url }}
 
     steps:
       - name: Checkout Repository
@@ -35,12 +34,3 @@ jobs:
           app-name: 'squib'
           slot-name: 'Production'
           publish-profile: ${{ secrets.AZUREAPPSERVICE_PUBLISHPROFILE }}
-
-      # - name: Deploy to Heroku
-      #   env:
-      #     HEROKU_API_KEY: ${{ secrets.HEROKU_API_KEY }}
-      #     HEROKU_APP_NAME: squib
-      #   run: |
-      #     heroku container:login
-      #     heroku container:push web -a $HEROKU_APP_NAME
-      #     heroku container:release web -a $HEROKU_APP_NAME
