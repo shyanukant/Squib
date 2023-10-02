@@ -19,6 +19,7 @@ RUN pip install --no-cache-dir -r requirements.txt
 # Copy the rest of your Django application code
 COPY . .
 
+ENV PORT=8000
 # Start your Django application as usual
 EXPOSE $PORT
 
