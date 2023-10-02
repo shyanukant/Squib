@@ -1,4 +1,4 @@
-name: Squib deploy 
+name: Squib build
 
 on:
   push:
@@ -22,16 +22,16 @@ jobs:
           username: ${{ secrets.DOCKER_USERNAME }}
           password: ${{ secrets.DOCKER_TOKEN }}
 
-      - name: Build and push Docker image
-        run: |
-          # Adjust the Dockerfile path as needed (e.g., ./squib/Dockerfile)
-          docker build -t ${{ secrets.DOCKER_USERNAME }}/squib .
-          docker push ${{ secrets.DOCKER_USERNAME }}/squib
+      # - name: Build and push Docker image
+      #   run: |
+      #     # Adjust the Dockerfile path as needed (e.g., ./squib/Dockerfile)
+      #     docker build -t ${{ secrets.DOCKER_USERNAME }}/squib .
+      #     docker push ${{ secrets.DOCKER_USERNAME }}/squib
 
-      - name: 'Deploy to Azure Web App'
-        uses: azure/webapps-deploy@v2
-        id: deploy-to-webapp
-        with:
-          app-name: 'squib'
-          slot-name: 'Production'
-          publish-profile: ${{ secrets.AZUREAPPSERVICE_PUBLISHPROFILE }}
+      # - name: 'Deploy to Azure Web App'
+      #   uses: azure/webapps-deploy@v2
+      #   id: deploy-to-webapp
+      #   with:
+      #     app-name: 'squib'
+      #     slot-name: 'Production'
+      #     publish-profile: ${{ secrets.AZUREAPPSERVICE_PUBLISHPROFILE }}
