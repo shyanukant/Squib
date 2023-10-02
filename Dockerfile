@@ -7,11 +7,10 @@ WORKDIR /app
 # Create a virtual environment
 RUN python -m venv venv
 
-# Activate the virtual environment
-SHELL ["venv/bin/activate"]
-
-# Update pip to the latest version
-RUN pip install --no-cache-dir --upgrade pip
+# Activate the virtual environment and set the script as executable
+RUN chmod +x venv/bin/activate && \
+    . venv/bin/activate && \
+    pip install --no-cache-dir --upgrade pip
 
 # Copy the requirements file and install dependencies
 COPY requirements.txt .
