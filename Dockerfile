@@ -19,8 +19,7 @@ RUN pip install --no-cache-dir -r requirements.txt
 # Copy the rest of your Django application code
 COPY . .
 
-ENV PORT=8000
 # Start your Django application as usual
-EXPOSE $PORT
+EXPOSE 8000
 
-CMD gunicorn squib.wsgi:application --workers=4 --bind 0.0.0.0:$PORT
+CMD gunicorn squib.wsgi:application --workers=4 --bind 0.0.0.0:8000
