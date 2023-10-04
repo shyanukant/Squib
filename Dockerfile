@@ -22,4 +22,4 @@ COPY . .
 # Start your Django application as usual
 EXPOSE 8000
 
-CMD ["venv/bin/gunicorn", "squib.wsgi:application", "--workers=4", "--bind", "0.0.0.0:8000"]
+CMD ["gunicorn squib.wsgi:application", "--workers=4", "--bind", "0.0.0.0:8000"]
