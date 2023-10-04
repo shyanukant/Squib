@@ -27,13 +27,12 @@ if os.path.isfile(ENV_PATH):
 
 # SECURITY WARNING: keep the secret key used in production secret!
 SECRET_KEY = os.environ["SECRET_KEY"]
-
 # SECURITY WARNING: don't run with debug turned on in production!
 DEBUG = os.environ.get("DEBUG", False)
 
 # App name
 APP_NAME = 'squib'
-ALLOWED_HOSTS = [".herokuapp.com", ".azurewebsites.net" '127.0.0.1', ]
+ALLOWED_HOSTS = [".herokuapp.com", ".azurewebsites.net", "localhost"]
 
 # Tweet Custom Setting
 MAX_TWEET_LENGTH = 250
