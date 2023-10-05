@@ -8,4 +8,4 @@ echo "Starting SSH ..."
 service ssh start
 
 # Start Gunicorn
-CMD ["gunicorn", "squib.wsgi:application", "--workers=4", "--bind", "0.0.0.0:8000"]
+exec ["gunicorn", "squib.wsgi:application", "--workers=4", "--bind", "0.0.0.0:8000"]

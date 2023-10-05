@@ -30,4 +30,4 @@ RUN apt-get update \
 
 EXPOSE 8000 2222
 
-ENTRYPOINT [ "init_container.sh" ]
+ENTRYPOINT [ "/app/init_container.sh" ] 
