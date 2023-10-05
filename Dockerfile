@@ -19,7 +19,15 @@ RUN pip install --no-cache-dir -r requirements.txt
 # Copy the rest of your Django application code
 COPY . .
 
-# Start your Django application as usual
-EXPOSE 8000
+COPY sshd_config /etc/ssh/
 
-CMD ["gunicorn", "squib.wsgi:application", "--workers=4", "--bind", "0.0.0.0:8000"]
+# Start and enable SSH
+RUN apt-get update \
+    && apt-get install -y --no-install-recommends dialog \
+    && apt-get install -y --no-install-recommends openssh-server \
+    && echo "root:Docker!" | chpasswd \
+    && chmod u+x /app/init_container.sh
+
+EXPOSE 8000 2222
+
+ENTRYPOINT [ "init_container.sh" ]
