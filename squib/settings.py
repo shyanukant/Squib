@@ -104,14 +104,26 @@ WSGI_APPLICATION = "squib.wsgi.application"
 
 # Database
 # https://docs.djangoproject.com/en/4.2/ref/settings/#databases
-
-DATABASES = {
-    "default": dj_database_url.config(default=os.environ.get('DATABASE_URL')),
-    # {
-    #     "ENGINE": "django.db.backends.sqlite3",
-    #     "NAME": BASE_DIR / "db.sqlite3",
-    # }
+if DEBUG: 
+    DATABASES = {
+        # "default": dj_database_url.config(default=os.environ.get('DATABASE_URL')),
+        {
+            "ENGINE": "django.db.backends.sqlite3",
+            "NAME": BASE_DIR / "db.sqlite3",
+        }
+    }
+else :
+    DATABASES = {
+    'default': {
+        'ENGINE': 'django.db.backends.postgresql',
+        'NAME': os.environ['DBNAME'],
+        'USER': os.environ['DBUSER'],
+        'PASSWORD': os.environ['DBPASS'],
+        'HOST': os.environ['DBHOST'],  # If your database is on a different host, change this
+        'PORT': os.environ['DBPORT'],            # Leave empty to use the default PostgreSQL port (5432)
+    }
 }
+
 
 
 # Password validation
