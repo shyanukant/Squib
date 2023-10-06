@@ -8,7 +8,9 @@ on:
 jobs:
   build:
     runs-on: ubuntu-latest
-   
+    env:
+      SECRET_KEY: ${{ secrets.SECRET_KEY }}
+
 
     steps:
       - name: Checkout Repository
@@ -25,7 +27,7 @@ jobs:
           # Adjust the Dockerfile path as needed (e.g., ./squib/Dockerfile)
           docker build -t ${{ secrets.DOCKER_USERNAME }}/squib .
           docker push ${{ secrets.DOCKER_USERNAME }}/squib
-          docker run -e SECRET_KEY=${{ secrets.SECRET_KEY }} -p 8000:8000 squib
+          docker run -e SECRET_KEY=$SECRET_KEY -p 8000:8000 squib
       # - name: 'Deploy to Azure Web App'
       #   uses: azure/webapps-deploy@v2
       #   id: deploy-to-webapp

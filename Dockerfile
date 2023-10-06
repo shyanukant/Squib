@@ -18,11 +18,14 @@ RUN pip install --no-cache-dir -r requirements.txt
 
 # Copy the rest of your Django application code
 COPY . .
-# Run Collect static
-RUN python manage.py collectstatic --noinput
 
-# Migrate
+# Set the SECRET_KEY environment variable
+ENV SECRET_KEY="${SECRET_KEY}"
+
+# Run collectstatic and migrate
+RUN python manage.py collectstatic --noinput
 RUN python manage.py migrate
+
 
 COPY sshd_config /etc/ssh/
 
