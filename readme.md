@@ -1,5 +1,5 @@
-# Squib - A tweet application using Django, Pure Javascript / React and Bootstrap
-
+# Squib - A tweet application using Django, React and Bootstrap
+[![Video Title](https://img.youtube.com/vi/zxKmpt4YEC0/0.jpg)](https://www.youtube.com/watch?v=zxKmpt4YEC0)
 
 - Site Map
 ```
