@@ -6,6 +6,7 @@ eval $(printenv | sed -n "s/^\([^=]\+\)=\(.*\)$/export \1=\2/p" | sed 's/"/\\\"/
 
 echo "Starting SSH ..."
 service ssh start
+python manage.py collectstatic --noinput
 
 # Start Gunicorn
 exec gunicorn squib.wsgi:application --workers=4 --bind 0.0.0.0:8000

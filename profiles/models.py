@@ -46,9 +46,9 @@ def followers_changed(sender, instance, action, pk_set, **kwargs):
     if request : 
         # add a success message
         if action == "post_add":
-            print(f"{instance} gained {len(pk_set)} new follower (s)")
+            # print(f"{instance} gained {len(pk_set)} new follower (s)")
             messages.success(request, f"You gained {len(pk_set)} new follower(s)")
         elif action == "post_remove":
-            print(f"{instance} loss {len(pk_set)} new follower (s)")
+            # print(f"{instance} loss {len(pk_set)} new follower (s)")
             # add a warning message
             messages.warning(request, f"You lost {len(pk_set)} follower(s)")
